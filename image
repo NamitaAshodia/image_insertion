@@ -1,0 +1,30 @@
+<?php
+
+include "connection.php";
+if (isset($_POST['insert']))
+{
+   
+    $images=$_FILES['image1']['name'];
+  $images2=$_FILES['image2']['name'];
+  $detail=$_POST['detail'];
+    $query = "INSERT INTO tablename(`image1`,`image2`,`name1`,`size`,`detail`) VALUES('$images','$images2','$name1','$size','$detail')";
+   //echo($query);
+    if ($conn->query($query) === TRUE) 
+    {
+      move_uploaded_file($_FILES["image1"]["tmp_name"],"image1/".$_FILES["image1"]["name"]);
+      move_uploaded_file($_FILES["image2"]["tmp_name"],"image1/".$_FILES["image2"]["name"]);
+      echo "<script>
+      alert('New record created successfully');
+      window.location.href='index1.php';
+      </script>";
+   
+    } 
+     else
+    {
+      echo(" not done");
+    }
+  
+  $conn->close();
+}
+
+?>
